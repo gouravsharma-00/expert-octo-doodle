@@ -14,7 +14,7 @@ const app = express();
 // Middleware
 app.use(
     cors({
-    origin: ["https://expert-ai-eta.vercel.app/"],
+    origin: ["https://expert-ai-eta.vercel.app"],
     methods: ["GET", "POST", "PUT", "DELETE"],
     credentials: true,
   })
