@@ -1,0 +1,15 @@
+**/.git/**
+**/.vscode/**
+**/node_modules/**
+**/src/**
+**/*.map
+**/*.ts
+**/*.tsx
+**/*.jsx
+**/*.env
+**/frontend/**
+**/backend/**
+
+!dist/extension.js
+!dist/webview.js
+!media/**

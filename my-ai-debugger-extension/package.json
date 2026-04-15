@@ -1,0 +1,113 @@
+{
+  "name": "my-ai-debugger-extension",
+  "displayName": "AI Code Debugger",
+  "description": "Debug selected code/files with AI, store history in MongoDB Atlas, and review results in a React-based VS Code webview.",
+  "version": "0.0.1",
+  "publisher": "local",
+  "engines": {
+    "vscode": "^1.95.0"
+  },
+  "categories": [
+    "Other"
+  ],
+  "icon": "media/icon.png",
+  "activationEvents": [
+    "onCommand:aiDebugger.openPanel",
+    "onCommand:aiDebugger.debugSelection",
+    "onCommand:aiDebugger.debugFile",
+    "onCommand:aiDebugger.showHistory",
+    "onCommand:aiDebugger.clearHistory",
+    "onCommand:aiDebugger.configure",
+    "onView:aiDebugger.sidebar"
+  ],
+  "main": "./dist/extension.js",
+  "contributes": {
+    "commands": [
+      {
+        "command": "aiDebugger.openPanel",
+        "title": "AI Debugger: Open Panel"
+      },
+      {
+        "command": "aiDebugger.debugSelection",
+        "title": "AI Debugger: Debug Selection"
+      },
+      {
+        "command": "aiDebugger.debugFile",
+        "title": "AI Debugger: Debug File"
+      },
+      {
+        "command": "aiDebugger.showHistory",
+        "title": "AI Debugger: Show History"
+      },
+      {
+        "command": "aiDebugger.clearHistory",
+        "title": "AI Debugger: Clear History"
+      },
+      {
+        "command": "aiDebugger.configure",
+        "title": "AI Debugger: Configure (MongoDB URI / AI Key)"
+      }
+    ],
+    "keybindings": [
+      {
+        "command": "aiDebugger.debugSelection",
+        "key": "ctrl+shift+d",
+        "mac": "cmd+shift+d",
+        "when": "editorTextFocus"
+      }
+    ],
+    "viewsContainers": {
+      "activitybar": [
+        {
+          "id": "aiDebugger",
+          "title": "AI Debugger",
+          "icon": "media/activity.svg"
+        }
+      ]
+    },
+    "views": {
+      "aiDebugger": [
+        {
+          "id": "aiDebugger.sidebar",
+          "name": "AI Debugger"
+        }
+      ]
+    }
+  },
+  "scripts": {
+    "build": "webpack --mode production",
+    "watch": "webpack --watch --mode development",
+    "package": "vsce package"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.27.1",
+    "@babel/preset-env": "^7.27.1",
+    "@babel/preset-react": "^7.27.1",
+    "@babel/preset-typescript": "^7.27.1",
+    "@types/node": "^22.16.0",
+    "@types/react": "^19.2.7",
+    "@types/react-dom": "^19.2.3",
+    "@types/vscode": "^1.95.0",
+    "babel-loader": "^10.0.0",
+    "css-loader": "^7.1.2",
+    "style-loader": "^4.0.0",
+    "ts-loader": "^9.5.2",
+    "typescript": "^5.9.2",
+    "webpack": "^5.101.3",
+    "webpack-cli": "^6.0.1"
+  },
+  "dependencies": {
+    "@google/genai": "^1.44.0",
+    "@monaco-editor/react": "^4.7.0",
+    "bcryptjs": "^3.0.3",
+    "framer-motion": "^12.34.3",
+    "jsonwebtoken": "^9.0.3",
+    "lucide-react": "^0.575.0",
+    "mongoose": "^9.3.1",
+    "react": "^19.2.0",
+    "react-dom": "^19.2.0",
+    "react-markdown": "^10.1.0",
+    "react-router-dom": "^7.13.1",
+    "react-syntax-highlighter": "^15.6.6"
+  }
+}
