@@ -1,19 +1,42 @@
-import { motion } from "framer-motion";
-import { Bug, ShieldCheck, Zap, Code, Brain, ArrowRight, Menu } from "lucide-react";
-import { useState } from "react";
-import { Link } from 'react-router-dom';
+import { useState } from 'react'
+import { Link } from 'react-router-dom'
+import { motion } from 'framer-motion'
+import { ArrowRight, Bug, Brain, Code, Menu, ShieldCheck, Zap } from 'lucide-react'
+
+void motion
 
 export default function Landing() {
   const [menuOpen, setMenuOpen] = useState(false);
 
   return (
-    <div className="bg-[#0b1120] text-white min-h-screen font-sans overflow-x-hidden">
-      
+    <div className="relative bg-[#0a0a0f] text-[#f1f5f9] min-h-screen font-sans overflow-x-hidden">
+      {/* Animated gradient mesh + subtle developer grid */}
+      <div className="pointer-events-none absolute inset-0">
+        <motion.div
+          className="absolute -top-24 -left-24 w-[520px] h-[520px] rounded-full bg-[#7c3aed]/20 blur-3xl"
+          animate={{ x: [0, 90, 0], y: [0, 60, 0] }}
+          transition={{ duration: 9, repeat: Infinity, ease: 'easeInOut' }}
+        />
+        <motion.div
+          className="absolute top-40 right-[-120px] w-[520px] h-[520px] rounded-full bg-[#06b6d4]/10 blur-3xl"
+          animate={{ x: [0, -90, 0], y: [0, -50, 0] }}
+          transition={{ duration: 11, repeat: Infinity, ease: 'easeInOut' }}
+        />
+        <div className="absolute inset-0 opacity-40 [background-image:linear-gradient(to_right,rgba(124,58,237,0.18)_1px,transparent_1px),linear-gradient(to_bottom,rgba(6,182,212,0.10)_1px,transparent_1px)] [background-size:48px_48px]" />
+      </div>
+
       {/* NAVBAR */}
-      <nav className="flex justify-between items-center px-6 md:px-16 py-6 border-b border-slate-800">
-        <h1 className="text-2xl font-bold tracking-wide bg-gradient-to-r from-indigo-400 to-purple-500 bg-clip-text text-transparent">
-          AI Debugger
-        </h1>
+      <nav className="relative z-10 flex justify-between items-center px-6 md:px-16 py-6 border-b border-[#1e1e2e]/70">
+        <div className="flex items-center gap-3">
+          <div className="w-9 h-9 rounded-xl border border-[#1e1e2e] bg-[#111118] flex items-center justify-center text-[#7c3aed] shadow-[0_0_0_1px_rgba(124,58,237,0.18)]">
+            AD
+          </div>
+          <h1 className="text-xl font-bold tracking-tight">
+            <span className="bg-gradient-to-r from-[#7c3aed] to-[#a855f7] bg-clip-text text-transparent">
+              AI Debugger
+            </span>
+          </h1>
+        </div>
 
         <div className="hidden md:flex gap-8 text-slate-300">
           <a href="#features" className="hover:text-white transition">Features</a>
@@ -36,30 +59,50 @@ export default function Landing() {
       </nav>
 
       {menuOpen && (
-        <div className="md:hidden flex flex-col items-center gap-4 py-4 bg-[#111827]">
-          <a href="#features" onClick={() => setMenuOpen(false)}>Features</a>
-          <a href="#how" onClick={() => setMenuOpen(false)}>How It Works</a>
-          <Link to="/login" onClick={() => setMenuOpen(false)} className="px-5 py-2 rounded-xl text-sm font-medium border border-slate-700 hover:border-indigo-500 transition">
-            Login
-          </Link>
-          <Link to="/dashboard" onClick={() => setMenuOpen(false)} className="bg-indigo-600 hover:bg-indigo-500 transition px-5 py-2 rounded-xl text-sm font-medium shadow-lg shadow-indigo-600/20">
-            Get Started
-          </Link>
+        <div className="relative z-10 md:hidden px-6 pt-4 pb-10">
+          <div className="bg-[#111118]/60 backdrop-blur border border-[#1e1e2e] rounded-2xl shadow-[0_0_0_1px_rgba(124,58,237,0.08)] p-4 flex flex-col items-center gap-4">
+            <a
+              href="#features"
+              onClick={() => setMenuOpen(false)}
+              className="text-[#64748b] hover:text-[#f1f5f9] transition duration-200"
+            >
+              Features
+            </a>
+            <a
+              href="#how"
+              onClick={() => setMenuOpen(false)}
+              className="text-[#64748b] hover:text-[#f1f5f9] transition duration-200"
+            >
+              How It Works
+            </a>
+            <Link
+              to="/login"
+              onClick={() => setMenuOpen(false)}
+              className="px-5 py-2 rounded-xl text-sm font-medium border border-[#1e1e2e] hover:border-[#7c3aed]/60 transition duration-200"
+            >
+              Login
+            </Link>
+            <Link
+              to="/login"
+              onClick={() => setMenuOpen(false)}
+              className="bg-[#7c3aed] hover:bg-[#a855f7] transition duration-200 px-5 py-2 rounded-xl text-sm font-semibold shadow-[0_0_0_1px_rgba(124,58,237,0.18)]"
+            >
+              Get Started
+            </Link>
+          </div>
         </div>
       )}
 
       {/* HERO SECTION */}
-      <section className="px-6 md:px-16 py-24 text-center relative">
-        <div className="absolute w-96 h-96 bg-indigo-600/20 blur-3xl rounded-full top-10 left-1/2 -translate-x-1/2"></div>
-
+      <section className="relative z-10 px-6 md:px-16 pt-20 pb-12 text-center">
         <motion.h2
-          initial={{ opacity: 0, y: 40 }}
+          initial={{ opacity: 0, y: 26 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8 }}
-          className="text-4xl md:text-6xl font-bold leading-tight relative z-10"
+          transition={{ duration: 0.65 }}
+          className="text-4xl md:text-6xl font-bold leading-tight"
         >
-          Intelligent Debugging  
-          <span className="block bg-gradient-to-r from-indigo-400 to-purple-500 bg-clip-text text-transparent">
+          Intelligent Debugging
+          <span className="block bg-gradient-to-r from-[#7c3aed] to-[#a855f7] bg-clip-text text-transparent">
             Powered by AI
           </span>
         </motion.h2>
@@ -67,87 +110,201 @@ export default function Landing() {
         <motion.p
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
-          transition={{ delay: 0.4 }}
-          className="text-slate-400 mt-6 max-w-2xl mx-auto text-lg"
+          transition={{ delay: 0.25, duration: 0.5 }}
+          className="text-[#64748b] mt-6 max-w-2xl mx-auto text-lg leading-relaxed"
         >
-          AI-driven assistant that detects bugs, suggests fixes,
-          improves performance, and secures your code — instantly.
+          Developer-focused analysis that detects bugs, proposes fixes, improves performance, and hardens
+          security — with actionable output.
         </motion.p>
 
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ delay: 0.7 }}
-          className="mt-10 flex flex-col sm:flex-row justify-center gap-4"
-        >
-          <Link to="/login" className="bg-indigo-600 hover:bg-indigo-500 transition px-8 py-4 rounded-2xl font-semibold flex items-center justify-center gap-2 shadow-xl shadow-indigo-600/30">
-            Get Started <ArrowRight size={18} />
+        <div className="mt-10 grid lg:grid-cols-[1.15fr_0.85fr] gap-8 items-stretch max-w-6xl mx-auto">
+          {/* Glass hero content */}
+          <motion.div
+            initial={{ opacity: 0, y: 14 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.15 }}
+            className="bg-[#111118]/50 backdrop-blur border border-[#1e1e2e] rounded-2xl p-6 md:p-8 shadow-[0_0_0_1px_rgba(124,58,237,0.10)] text-left"
+          >
+            <h3 className="text-xl font-semibold tracking-tight text-[#f1f5f9]">
+              Your code, analyzed with precision
+            </h3>
+            <p className="text-[#64748b] mt-3 leading-relaxed text-sm md:text-base">
+              Run a targeted AI pass and get bugs, performance notes, security issues, and a refactored
+              version of your code — presented in an editor-like workflow.
+            </p>
+
+            {/* CTA buttons */}
+            <div className="mt-6 flex flex-col sm:flex-row gap-3">
+              <Link
+                to="/login"
+                className="relative overflow-hidden bg-gradient-to-r from-[#7c3aed] to-[#a855f7] hover:from-[#7c3aed] hover:to-[#a855f7] transition duration-200 text-white px-6 py-3 rounded-xl font-semibold shadow-[0_0_0_1px_rgba(124,58,237,0.18)] flex items-center justify-center gap-2"
+              >
+                <motion.span
+                  className="absolute -left-28 top-0 h-full w-28 bg-[linear-gradient(90deg,transparent,rgba(255,255,255,0.50),transparent)]"
+                  animate={{ x: ['-140%', '140%'] }}
+                  transition={{ duration: 1.4, repeat: Infinity, ease: 'easeInOut' }}
+                />
+                <span className="relative inline-flex items-center gap-2">
+                  Get Started <ArrowRight size={18} />
+                </span>
+              </Link>
+
+              <button
+                type="button"
+                className="px-6 py-3 rounded-xl font-semibold border border-[#1e1e2e] bg-[#111118]/40 hover:bg-[#111118] hover:border-[#7c3aed]/40 transition duration-200"
+              >
+                Watch Demo
+              </button>
+            </div>
+
+            {/* Stats bar */}
+            <div className="mt-7 grid grid-cols-3 gap-3">
+              <div className="rounded-xl border border-[#7c3aed]/30 bg-[#7c3aed]/10 px-3 py-3 text-left">
+                <div className="text-[11px] tracking-tight text-[#64748b]">Languages</div>
+                <div className="text-lg font-bold text-[#a855f7] mt-1">5+</div>
+              </div>
+              <div className="rounded-xl border border-[#06b6d4]/30 bg-[#06b6d4]/10 px-3 py-3 text-left">
+                <div className="text-[11px] tracking-tight text-[#64748b]">Bugs Caught</div>
+                <div className="text-lg font-bold text-[#06b6d4] mt-1">1200+</div>
+              </div>
+              <div className="rounded-xl border border-[#7c3aed]/30 bg-[#7c3aed]/10 px-3 py-3 text-left">
+                <div className="text-[11px] tracking-tight text-[#64748b]">Developers</div>
+                <div className="text-lg font-bold text-[#a855f7] mt-1">10k+</div>
+              </div>
+            </div>
+          </motion.div>
+
+          {/* Code preview card */}
+          <motion.div
+            initial={{ opacity: 0, y: 18 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.25 }}
+            className="bg-[#111118]/40 backdrop-blur border border-[#1e1e2e] rounded-2xl p-5 md:p-6 shadow-[0_0_0_1px_rgba(124,58,237,0.08)]"
+          >
+            <div className="flex items-center justify-between mb-4">
+              <div className="flex items-center gap-2 text-xs text-[#64748b]">
+                <span className="inline-flex items-center justify-center w-5 h-5 rounded-md border border-[#1e1e2e] bg-[#111118] text-[#7c3aed]">
+                  {'</>'}
+                </span>
+                <span className="tracking-tight">Preview</span>
+              </div>
+              <div className="text-xs text-[#64748b]">
+                <span className="text-[#06b6d4] font-semibold">AI</span> report
+              </div>
+            </div>
+
+            <pre className="text-left text-xs md:text-sm text-[#64748b] bg-[#0a0a0f] border border-[#1e1e2e] rounded-xl p-4 overflow-x-auto">
+              <code className="whitespace-pre-wrap">
+                {`// Paste code → Analyze → Get fixes
+const bugs = await debugger.analyze(code, language);
+
+bugs.forEach((b) => {
+  console.log(b.issue, b.fix);
+});`}
+              </code>
+            </pre>
+
+            <div className="mt-4 flex items-center justify-between">
+              <div className="text-xs text-[#64748b]">
+                <span className="text-[#7c3aed] font-semibold">Rule:</span> Fix null risks
+              </div>
+              <div className="text-xs">
+                <span className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-[#7c3aed]/30 bg-[#7c3aed]/10 text-[#a855f7]">
+                  <span className="w-2 h-2 rounded-full bg-[#06b6d4]" />
+                  Live
+                </span>
+              </div>
+            </div>
+          </motion.div>
+        </div>
+      </section>
+
+      {/* FEATURES */}
+      <section id="features" className="relative z-10 px-6 md:px-16 py-16 md:py-24">
+        <div className="max-w-6xl mx-auto">
+          <div className="text-center">
+            <h3 className="text-3xl md:text-4xl font-bold tracking-tight">
+              Powerful AI Capabilities
+            </h3>
+            <p className="text-[#64748b] mt-3 max-w-2xl mx-auto leading-relaxed">
+              Clean output, editor-friendly structure, and explanations you can ship with.
+            </p>
+          </div>
+
+          <div className="mt-12 grid sm:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
+            <Feature
+              icon={<Bug className="text-[#7c3aed]" size={20} />}
+              title="Real-Time Bug Detection"
+              desc="Detect logical errors, runtime issues, and risky patterns instantly."
+            />
+            <Feature
+              icon={<Brain className="text-[#06b6d4]" size={20} />}
+              title="AI Fix Suggestions"
+              desc="Structured fixes with clear reasoning and actionable steps."
+            />
+            <Feature
+              icon={<Zap className="text-[#f59e0b]" size={20} />}
+              title="Performance Optimization"
+              desc="Analyze complexity and refactor inefficient code paths."
+            />
+            <Feature
+              icon={<ShieldCheck className="text-[#ef4444]" size={20} />}
+              title="Security Scanner"
+              desc="Identify vulnerabilities and insecure coding patterns."
+            />
+            <Feature
+              icon={<Code className="text-[#a855f7]" size={20} />}
+              title="Code Refactoring"
+              desc="Clean messy code and improve maintainability automatically."
+            />
+            <Feature
+              icon={<Brain className="text-[#7c3aed]" size={20} />}
+              title="Explain for Beginners"
+              desc="Understand complex logic in human language, without losing rigor."
+            />
+          </div>
+        </div>
+      </section>
+
+      <section id="how" className="relative z-10 px-6 md:px-16 pb-16 md:pb-24">
+        <div className="max-w-6xl mx-auto">
+          <h3 className="text-3xl md:text-4xl font-bold tracking-tight text-center">
+            How It Works
+          </h3>
+
+          <div className="mt-12 grid md:grid-cols-3 gap-6 md:gap-8">
+            <Step number="01" title="Paste Your Code" desc="Copy snippets or upload a file directly." />
+            <Step number="02" title="AI Analysis" desc="Our assistant inspects logic, performance, and security." />
+            <Step number="03" title="Fix & Improve" desc="Get actionable suggestions and refactored code output." />
+          </div>
+        </div>
+      </section>
+
+      <section id="contact" className="relative z-10 px-6 md:px-16 pb-16 md:pb-20">
+        <div className="max-w-6xl mx-auto bg-[#111118]/40 backdrop-blur border border-[#1e1e2e] rounded-3xl p-8 md:p-10 shadow-[0_0_0_1px_rgba(124,58,237,0.08)] text-center">
+          <h3 className="text-3xl md:text-4xl font-bold tracking-tight">
+            Ready to Debug Smarter?
+          </h3>
+          <p className="text-[#64748b] mt-3 max-w-2xl mx-auto leading-relaxed">
+            Move faster with an AI workflow that feels like your editor.
+          </p>
+
+          <Link
+            to="/login"
+            className="mt-8 inline-flex items-center justify-center relative overflow-hidden bg-gradient-to-r from-[#7c3aed] to-[#a855f7] hover:from-[#7c3aed] hover:to-[#a855f7] transition duration-200 text-white px-10 py-4 rounded-2xl text-lg font-semibold shadow-[0_0_0_1px_rgba(124,58,237,0.18)]"
+          >
+            <motion.span
+              className="absolute inset-0 bg-[linear-gradient(90deg,transparent,rgba(255,255,255,0.45),transparent)]"
+              initial={{ x: '-150%' }}
+              animate={{ x: ['-150%', '150%'] }}
+              transition={{ duration: 1.2, repeat: Infinity, ease: 'easeInOut' }}
+            />
+            Get Started Now <ArrowRight size={18} className="relative" />
           </Link>
-
-          <button className="border border-slate-700 hover:border-indigo-500 transition px-8 py-4 rounded-2xl font-semibold">
-            Watch Demo
-          </button>
-        </motion.div>
-      </section>
-
-      {/* ... keeping the rest of the existing Landing page layout */}
-      <section id="features" className="px-6 md:px-16 py-24 bg-[#0f172a]">
-        <h3 className="text-3xl font-bold text-center mb-16">
-          Powerful AI Capabilities
-        </h3>
-
-        <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-10">
-          <Feature icon={<Bug />} title="Real-Time Bug Detection"
-            desc="Detect logical errors, runtime issues, and bad practices instantly." />
-
-          <Feature icon={<Brain />} title="AI Fix Suggestions"
-            desc="Receive structured fixes with detailed explanations." />
-
-          <Feature icon={<Zap />} title="Performance Optimization"
-            desc="Analyze complexity and refactor inefficient code." />
-
-          <Feature icon={<ShieldCheck />} title="Security Scanner"
-            desc="Identify vulnerabilities and insecure coding patterns." />
-
-          <Feature icon={<Code />} title="Code Refactoring"
-            desc="Clean messy code and improve structure automatically." />
-
-          <Feature icon={<Brain />} title="Explain for Beginners"
-            desc="Understand complex logic in simple human language." />
         </div>
       </section>
 
-      <section id="how" className="px-6 md:px-16 py-24">
-        <h3 className="text-3xl font-bold text-center mb-16">
-          How It Works
-        </h3>
-
-        <div className="grid md:grid-cols-3 gap-10 text-center">
-          <Step number="01" title="Paste Your Code"
-            desc="Copy any code or upload a file directly." />
-
-          <Step number="02" title="AI Analysis"
-            desc="Our agent processes and thoroughly inspects your code." />
-
-          <Step number="03" title="Fix & Improve"
-            desc="Receive actionable suggestions instantly." />
-        </div>
-      </section>
-
-      <section className="px-6 md:px-16 py-24 bg-gradient-to-r from-indigo-600/20 to-purple-600/20 text-center">
-        <h3 className="text-3xl md:text-4xl font-bold">
-          Ready to Debug Smarter?
-        </h3>
-        <p className="text-slate-400 mt-4">
-          Upgrade your development workflow with AI intelligence.
-        </p>
-
-        <Link to="/dashboard" className="inline-block mt-8 bg-indigo-600 hover:bg-indigo-500 transition px-10 py-4 rounded-2xl text-lg font-semibold shadow-xl shadow-indigo-600/30">
-          Get Started Now
-        </Link>
-      </section>
-
-      <footer className="border-t border-slate-800 py-8 text-center text-slate-500 text-sm">
+      <footer className="relative z-10 border-t border-[#1e1e2e] py-8 text-center text-sm text-[#64748b]">
         © 2026 AI Debugger
       </footer>
     </div>
@@ -157,22 +314,25 @@ export default function Landing() {
 function Feature({ icon, title, desc }) {
   return (
     <motion.div
-      whileHover={{ scale: 1.05 }}
-      className="bg-[#1e293b] p-8 rounded-2xl shadow-lg border border-slate-800 hover:border-indigo-500 transition"
+      whileHover={{ y: -6 }}
+      transition={{ duration: 0.2 }}
+      className="bg-[#111118]/40 backdrop-blur border border-[#1e1e2e] rounded-2xl p-7 hover:border-[#7c3aed]/40 shadow-[0_0_0_1px_rgba(124,58,237,0.08)] transition duration-200"
     >
-      <div className="text-indigo-400 mb-4">{icon}</div>
-      <h4 className="text-xl font-semibold mb-3">{title}</h4>
-      <p className="text-slate-400">{desc}</p>
+      <div className="h-10 w-10 rounded-xl border border-[#1e1e2e] bg-[#0a0a0f] flex items-center justify-center">
+        {icon}
+      </div>
+      <h4 className="text-lg font-semibold mt-4 tracking-tight">{title}</h4>
+      <p className="text-[#64748b] mt-2 leading-relaxed text-sm">{desc}</p>
     </motion.div>
   );
 }
 
 function Step({ number, title, desc }) {
   return (
-    <div className="bg-[#1e293b] p-8 rounded-2xl shadow-lg border border-slate-800">
-      <div className="text-indigo-400 text-3xl font-bold mb-4">{number}</div>
-      <h4 className="text-xl font-semibold mb-3">{title}</h4>
-      <p className="text-slate-400">{desc}</p>
+    <div className="bg-[#111118]/30 backdrop-blur border border-[#1e1e2e] rounded-2xl p-7 shadow-[0_0_0_1px_rgba(124,58,237,0.06)]">
+      <div className="text-[#7c3aed] text-3xl font-bold tracking-tight">{number}</div>
+      <h4 className="text-lg font-semibold mt-3 tracking-tight">{title}</h4>
+      <p className="text-[#64748b] mt-2 leading-relaxed text-sm">{desc}</p>
     </div>
   );
 }
