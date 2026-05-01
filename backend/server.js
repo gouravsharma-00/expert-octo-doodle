@@ -16,7 +16,7 @@ app.use(
     cors({
     origin: function (origin, callback) {
       // Allow specific domains, missing origins (like postman), and VS Code Webviews
-      const allowedOrigins = ["https://expert-ai-eta.vercel.app", "http://localhost:5173", "http://localhost:3000", "http://127.0.0.1:5173"];
+      const allowedOrigins = ["https://expert-ai-eta.vercel.app", "http://localhost:5173", "http://localhost:3000", "http://127.0.0.1:5173", "https://expert-octo-doodle-alpha.vercel.app"];
       if (!origin || origin.startsWith("vscode-webview://") || allowedOrigins.includes(origin)) {
         callback(null, true);
       } else {
