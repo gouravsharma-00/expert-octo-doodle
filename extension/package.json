@@ -1,8 +1,14 @@
 {
-  "name": "ai-debugger",
+  "name": "expert-octo-doodle",
   "displayName": "AI Debugger",
+  "publisher": "GouravSharma",
   "description": "AI Debugger Extension",
-  "version": "0.0.1",
+  "version": "0.0.2",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/gouravsharma-00/expert-octo-doodle"
+  },
+  "license": "MIT",
   "engines": {
     "vscode": "^1.90.0"
   },
