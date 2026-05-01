@@ -39,44 +39,44 @@ const vscode = __importStar(require("vscode"));
 const path = __importStar(require("path"));
 const fs = __importStar(require("fs"));
 function activate(context) {
-    // Helper to get HTML content
     const getHtmlContent = (webview) => {
-        const distPath = path.join(context.extensionPath, '..', 'frontend', 'dist');
-        const indexPath = path.join(distPath, 'index.html');
+        // ✅ frontend/dist is now INSIDE the extension folder
+        const distUri = vscode.Uri.joinPath(context.extensionUri, 'frontend', 'dist');
+        const indexPath = path.join(distUri.fsPath, 'index.html');
         if (fs.existsSync(indexPath)) {
             let htmlContent = fs.readFileSync(indexPath, 'utf-8');
+            // Fix asset paths
             htmlContent = htmlContent.replace(/(href|src)="([./]*assets\/[^"]+)"/g, (match, p1, p2) => {
                 const normalizedPath = p2.replace(/^[./]+/, '');
-                const uri = vscode.Uri.file(path.join(distPath, normalizedPath));
-                const webviewUri = webview.asWebviewUri(uri);
-                return `${p1}="${webviewUri}"`;
+                const uri = vscode.Uri.joinPath(distUri, normalizedPath);
+                return `${p1}="${webview.asWebviewUri(uri)}"`;
             });
             htmlContent = htmlContent.replace(/(href|src)="([./]*[^"]+\.(svg|png|ico))"/g, (match, p1, p2) => {
                 if (p2.startsWith('http'))
                     return match;
                 const normalizedPath = p2.replace(/^[./]+/, '');
-                const uri = vscode.Uri.file(path.join(distPath, normalizedPath));
-                const webviewUri = webview.asWebviewUri(uri);
-                return `${p1}="${webviewUri}"`;
+                const uri = vscode.Uri.joinPath(distUri, normalizedPath);
+                return `${p1}="${webview.asWebviewUri(uri)}"`;
             });
-            // Remove crossorigin attributes which can block loading from vscode-resource
             htmlContent = htmlContent.replace(/ crossorigin/g, '');
             return htmlContent;
         }
         else {
-            return `<h1>Error: Frontend build not found at ${indexPath}</h1><p>Please run npm run build in the frontend directory.</p>`;
+            return `<h1>Error: Frontend build not found at ${indexPath}</h1>
+              <p>Please run npm run build in the frontend directory.</p>`;
         }
     };
-    // Register Sidebar View
+    // Sidebar
     const provider = new SidebarProvider(context, getHtmlContent);
     context.subscriptions.push(vscode.window.registerWebviewViewProvider('ai-debugger-sidebar', provider));
-    // Register Command Panel
-    let disposable = vscode.commands.registerCommand('ai-debugger.start', () => {
+    // Command panel
+    const disposable = vscode.commands.registerCommand('ai-debugger.start', () => {
         const panel = vscode.window.createWebviewPanel('aiDebugger', 'AI Debugger', vscode.ViewColumn.One, {
             enableScripts: true,
             retainContextWhenHidden: true,
             localResourceRoots: [
-                vscode.Uri.file(path.join(context.extensionPath, '..', 'frontend', 'dist'))
+                // ✅ points inside the extension, not outside
+                vscode.Uri.joinPath(context.extensionUri, 'frontend', 'dist')
             ]
         });
         panel.webview.html = getHtmlContent(panel.webview);
@@ -90,11 +90,12 @@ class SidebarProvider {
         this._context = _context;
         this._getHtmlContent = _getHtmlContent;
     }
-    resolveWebviewView(webviewView, context, _token) {
+    resolveWebviewView(webviewView, _context, _token) {
         webviewView.webview.options = {
             enableScripts: true,
             localResourceRoots: [
-                vscode.Uri.file(path.join(this._context.extensionPath, '..', 'frontend', 'dist'))
+                // ✅ same fix here
+                vscode.Uri.joinPath(this._context.extensionUri, 'frontend', 'dist')
             ]
         };
         webviewView.webview.html = this._getHtmlContent(webviewView.webview);
