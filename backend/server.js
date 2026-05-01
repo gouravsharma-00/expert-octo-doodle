@@ -14,7 +14,15 @@ const app = express();
 // Middleware
 app.use(
     cors({
-    origin: ["https://expert-ai-eta.vercel.app"],
+    origin: function (origin, callback) {
+      // Allow specific domains, missing origins (like postman), and VS Code Webviews
+      const allowedOrigins = ["https://expert-ai-eta.vercel.app", "http://localhost:5173", "http://localhost:3000", "http://127.0.0.1:5173"];
+      if (!origin || origin.startsWith("vscode-webview://") || allowedOrigins.includes(origin)) {
+        callback(null, true);
+      } else {
+        callback(new Error('Not allowed by CORS'));
+      }
+    },
     methods: ["GET", "POST", "PUT", "DELETE"],
     credentials: true,
   })
