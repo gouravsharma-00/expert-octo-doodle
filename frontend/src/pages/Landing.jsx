@@ -149,12 +149,12 @@ export default function Landing() {
                 </span>
               </Link>
 
-              <button
-                type="button"
+              <Link
+                to="/login"
                 className="px-6 py-3 rounded-xl font-semibold border border-[#1e1e2e] bg-[#111118]/40 hover:bg-[#111118] hover:border-[#7c3aed]/40 transition duration-200"
               >
                 Watch Demo
-              </button>
+              </Link>
             </div>
 
             {/* Stats bar */}

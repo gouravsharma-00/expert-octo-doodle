@@ -1,0 +1,53 @@
+{
+  "name": "ai-debugger",
+  "displayName": "AI Debugger",
+  "description": "AI Debugger Extension",
+  "version": "0.0.1",
+  "engines": {
+    "vscode": "^1.90.0"
+  },
+  "categories": [
+    "Other"
+  ],
+  "activationEvents": [],
+  "main": "./out/extension.js",
+  "contributes": {
+    "viewsContainers": {
+      "activitybar": [
+        {
+          "id": "ai-debugger-explorer",
+          "title": "AI Debugger",
+          "icon": "resources/icon.svg"
+        }
+      ]
+    },
+    "views": {
+      "ai-debugger-explorer": [
+        {
+          "type": "webview",
+          "id": "ai-debugger-sidebar",
+          "name": "AI Debugger",
+          "icon": "resources/icon.svg",
+          "contextualTitle": "AI Debugger"
+        }
+      ]
+    },
+    "commands": [
+      {
+        "command": "ai-debugger.start",
+        "title": "AI Debugger: Start",
+        "icon": "$(debug-alt)"
+      }
+    ]
+  },
+  "scripts": {
+    "vscode:prepublish": "npm run compile",
+    "compile": "tsc -p ./",
+    "watch": "tsc -watch -p ./"
+  },
+  "devDependencies": {
+    "@types/node": "20.x",
+    "@types/vscode": "^1.90.0",
+    "typescript": "^5.4.5"
+  }
+}
